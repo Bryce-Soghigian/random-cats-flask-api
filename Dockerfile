@@ -1,16 +1,10 @@
-FROM python:3
+FROM python:3.8.1
 
-# set a directory for the app
-WORKDIR /usr/src/app
+ENV APP_HOME /app
+WORKDIR $APP_HOME
 
-# copy all the files to the container
-COPY . .
+COPY . /app
 
-# install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
-# tell the port number the container should expose
-EXPOSE 5000
-
-# run the command
-CMD ["python", "./app.py"]
+ENTRYPOINT ["python app.py"]
